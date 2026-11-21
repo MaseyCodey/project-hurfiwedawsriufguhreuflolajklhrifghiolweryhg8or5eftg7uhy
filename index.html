@@ -11,7 +11,8 @@
     <title>Lola’s Butterfly Effect Foundation — Coming Soon</title>
     <link rel="icon" type="image/png" sizes="64x64" href="./assets/favicon.png">
     <link rel="apple-touch-icon" sizes="180x180" href="./assets/apple-touch-icon.png">
-    <link rel="stylesheet" href="./styles.css">
+    <link rel="stylesheet" href="./styles.css?v=3-replay">
+    <script src="./script.js?v=3-replay" defer></script>
   </head>
   <body>
     <svg class="svg-definitions" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
@@ -62,17 +63,54 @@
           <svg class="floating-butterfly butterfly-two" aria-hidden="true" focusable="false"><use href="#butterfly"/></svg>
           <span class="spark spark-one" aria-hidden="true">✦</span>
           <span class="spark spark-two" aria-hidden="true">✦</span>
-          <picture class="logo-picture">
-            <source srcset="./assets/logo.webp" type="image/webp">
-            <img class="foundation-logo" src="./assets/logo.png" alt="Lola’s Butterfly Effect Foundation logo: an illustrated girl with a monarch butterfly in her hair, surrounded by a yellow circle and orange lettering." width="1200" height="1200" fetchpriority="high" decoding="async">
-          </picture>
+          <button class="logo-button" id="logo-button" type="button" aria-label="Play Lola’s melody and butterfly animation" aria-describedby="logo-hint" disabled>
+            <picture class="logo-picture">
+              <source srcset="./assets/logo.webp" type="image/webp">
+              <img class="foundation-logo" src="./assets/logo.png" alt="Lola’s Butterfly Effect Foundation logo: an illustrated girl with a monarch butterfly in her hair, surrounded by a yellow circle and orange lettering." width="1200" height="1200" fetchpriority="high" decoding="async" draggable="false">
+            </picture>
+          </button>
+          <div class="butterfly-orbit-layer" id="butterfly-orbit-layer" aria-hidden="true"></div>
+          <div class="celebration-layer" id="celebration-layer" aria-hidden="true"></div>
+          <div class="logo-interaction" id="logo-interaction" hidden>
+            <p class="logo-hint" id="logo-hint">
+              <span class="hover-hint">Hover for butterflies. Click for a little melody.</span>
+              <span class="touch-hint">Tap the logo for butterflies &amp; a little melody.</span>
+            </p>
+            <button class="sound-stop" id="sound-stop" type="button" hidden>
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="6" y="6" width="12" height="12" rx="2" fill="currentColor"/></svg>
+              Stop melody
+            </button>
+            <p class="melody-status visually-hidden" id="melody-status" role="status" aria-live="polite"></p>
+            <p class="audio-help" id="audio-help" hidden>The melody couldn’t start. <a href="./assets/lolas-jingle.mp3">Open Lola’s melody</a>.</p>
+          </div>
+          <audio id="lola-melody" preload="none" src="./assets/lolas-jingle.mp3"></audio>
         </div>
       </main>
+
+      <noscript><p class="no-script-melody">Listen to Lola’s melody: <audio controls preload="none" src="./assets/lolas-jingle.mp3"></audio></p></noscript>
 
       <footer class="site-footer">
         <p>Lola’s Butterfly Effect Foundation</p>
         <p class="footer-note">Big things begin with small wings.</p>
       </footer>
     </div>
+
+    <template id="flutter-butterfly-template">
+      <svg class="flutter-butterfly" viewBox="0 0 100 90" aria-hidden="true" focusable="false">
+        <g class="flutter-wing flutter-wing-left">
+          <path d="M49 43C37 13 6 4 8 29c1 15 19 23 35 23C23 47 10 59 19 72c9 12 27 1 30-21" fill="var(--wing-color, #f35a29)" stroke="#704021" stroke-width="2.8" stroke-linejoin="round"/>
+          <path d="M15 28c9 2 21 10 28 17M22 65c9-1 16-6 22-11M27 21l16 24" fill="none" stroke="#704021" stroke-width="1.6" stroke-linecap="round"/>
+          <g fill="#fff8bd"><circle cx="14" cy="25" r="2"/><circle cx="18" cy="36" r="1.8"/><circle cx="26" cy="44" r="1.6"/><circle cx="22" cy="66" r="1.8"/><circle cx="29" cy="70" r="1.5"/></g>
+        </g>
+        <g class="flutter-wing flutter-wing-right">
+          <path d="M51 43C63 13 94 4 92 29c-1 15-19 23-35 23 20-5 33 7 24 20-9 12-27 1-30-21" fill="var(--wing-color, #f35a29)" stroke="#704021" stroke-width="2.8" stroke-linejoin="round"/>
+          <path d="M85 28c-9 2-21 10-28 17M78 65c-9-1-16-6-22-11M73 21L57 45" fill="none" stroke="#704021" stroke-width="1.6" stroke-linecap="round"/>
+          <g fill="#fff8bd"><circle cx="86" cy="25" r="2"/><circle cx="82" cy="36" r="1.8"/><circle cx="74" cy="44" r="1.6"/><circle cx="78" cy="66" r="1.8"/><circle cx="71" cy="70" r="1.5"/></g>
+        </g>
+        <path d="M48 36c-2-9-5-12-9-15m13 15c2-9 5-12 9-15" fill="none" stroke="#704021" stroke-width="2.2" stroke-linecap="round"/>
+        <ellipse cx="50" cy="49" rx="3" ry="15" fill="#704021"/>
+        <circle cx="50" cy="34" r="3.5" fill="#704021"/>
+      </svg>
+    </template>
   </body>
 </html>
